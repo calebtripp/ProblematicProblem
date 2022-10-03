@@ -6,7 +6,7 @@ namespace ProblematicProblem
 {
     public static class Program
     {
-        Randomrng;
+        static Random rng;
         static bool cont = true;
         static List<string> activities = new List<string>() { "Movies", "Paintball", "Bowling", "Lazer Tag", "LAN Party", "Hiking", "Axe Throwing", "Wine Tasting" };
         public static void Main(string[] args)
@@ -34,6 +34,7 @@ namespace ProblematicProblem
                 Console.Write("Would you like to add any activities before we generate one? yes/no: ");
                 bool addToList = bool.Parse(Console.ReadLine());
                 Console.WriteLine();
+
                 while (addToList)
                 {
                     Console.Write("What would you like to add? ");
@@ -46,9 +47,10 @@ namespace ProblematicProblem
                     }
                     Console.WriteLine();
                     Console.WriteLine("Would you like to add more? yes/no: ");
-                    string addToList = bool.Parse(Console.ReadLine());
+                    addToList = bool.Parse(Console.ReadLine());
                 }
             }
+
             while (cont)
             {
                 Console.Write("Connecting to the database");
@@ -66,19 +68,21 @@ namespace ProblematicProblem
                 }
                 Console.WriteLine();
                 int randomNumber = rng.Next(activities.Count);
-                string randomActivity = activities[randomNumber]
-                        if (userAge > 21 && randomActivity == "Wine Tasting") 
+                string randomActivity = activities[randomNumber].ToString();   
+                
+                if (userAge !> 21 && randomActivity == "Wine Tasting") 
                 {
                     Console.WriteLine($"Oh no! Looks like you are too young to do {randomActivity}");
                     Console.WriteLine("Pick something else!");
                     activities.Remove(randomActivity);
-                    string randomNumber = rng.Next(activities.Count);
-                    string randomActivity = activities[randomNumber];
+                  //  string randomNumber = rng.Next(activities.Count); commenting these two lines out brings errors from 7 to 1. not sure what purpose they serve. 
+                  //  string randomActivity = activities[randomNumber];
                 }
 
                 Console.Write($"Ah got it! {userName}, your random activity is: {randomActivity}! Is this ok or do you want to grab another activity? Keep/Redo: ");
                 Console.WriteLine();
-                bool cont = bool.Parse(Console.ReadLine());
+
+                 cont = bool.Parse(Console.ReadLine());
             }
         }
     }
